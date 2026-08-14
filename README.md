@@ -19,7 +19,7 @@ This extension won't help because each line would be it's own mime renderer (lab
 
 ## Requirements
 
-- JupyterLab >= 3.0
+- JupyterLab >= 4.0
 
 ## Install
 
@@ -75,8 +75,7 @@ jupyter lab build --minimize=False
 
 #### Publishing
 
-Before starting, you'll need to have run: `pip install twine jupyter_packaging`
-
+0. Install dependencies: `pip install twine hatch`
 1. Update the version in `package.json` and update the release date in `CHANGELOG.md`
 2. Commit the change in step 1, tag it, then push it
 
@@ -89,9 +88,8 @@ git push && git push --tags
 3. Create the artifacts
 
 ```
-rm -rf dist jupyterlab_limit_output/labextension
-jlpm run build
-python setup.py sdist bdist_wheel
+rm -rf dist lib tsconfig.tsbuildinfo jupyterlab_limit_output/labextension
+hatch build .
 ```
 
 4. Test this against the test pypi. You can then install from here to test as well:
